@@ -13,6 +13,7 @@ PKGS=(
 
     # XORG DISPLAY RENDERING ----------------------------------------------
   
+    'xorg'                  # XOrg meta package
     'xorg-drivers'          # Display Drivers 
     'xorg-server'           # XOrg server
     'xorg-apps'             # XOrg apps group
