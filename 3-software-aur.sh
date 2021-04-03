@@ -20,6 +20,11 @@ PKGS=(
     # SYSTEM UTILITIES ----------------------------------------------------
 
     'gtkhash'                   # Checksum verifier
+    'wd719x-firmware'           # Additional firmwares 
+    'aic94xx-firmware'          # Additional firmwares 
+    'upd72020x-fw'              # Additional firmwares 
+
+
   # 'menulibre'                 # Menu editor
 
     # DEVELOPMENT ---------------------------------------------------------
@@ -51,7 +56,7 @@ PKGS=(
 
     'spotify'                   # Music player
     'vcl'                       # Video player
-    'ferdi'                     # Messenger app
+    'ferdi-bin'                 # Messenger app
     'screenkey'                 # Screencast your keypresses
   # 'lbry-app-bin'              # LBRY Linux Application
 

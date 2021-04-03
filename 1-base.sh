@@ -26,6 +26,7 @@ PKGS=(
 
     # SETUP DESKTOP -------------------------------------------------------
     
+    'base-devel'	    # Package group to install yay later
     'i3-gaps'               # i3 Gaps Window Manager
     'i3status'              # Status bar
     'i3blocks'              # Blocks for i3bar status line
