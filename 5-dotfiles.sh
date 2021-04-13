@@ -9,13 +9,13 @@
 #----------------------------------------------------------------------------
 
 echo -e "\nDoting the files :D"
-git clone https://github.com/Francisco-Vivas/dotfiles.git
+git clone https://github.com/Francisco-Vivas/dotfiles.git $HOME
 ~/dotfiles/scripts/symlink-dotfiles.sh
 
 echo -e "\nInstalling Nvim plugins..."
 git clone https://github.com/wbthomason/packer.nvim\
   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-sudo npm install -g vscode-html-languageserver-bin typescript typescript-language-server  vscode-css-languageserver-bin vscode-json-languageserver prettier
+sudo npm install -g vscode-html-languageserver-bin typescript typescript-language-server vscode-css-languageserver-bin vscode-json-languageserver prettier
 
 nvim --headless +PackerInstall +qall
 nvim --headless +TSUpdate +qall
@@ -60,10 +60,17 @@ for PLG in "${PLGNS[@]}"; do
     code --install-extension $PLG --force
  done
 
-# Symlink the vscode user preferences
-echo -e "\nSetting the users preferences...."
-source "~/dotfiles/scripts/linkDot.sh"
-linkDot .config/Code/User/settings.json
-linkDot .config/Code/User/snippets/javascript.json
+# Install oh-my-zsh
+echo -e "\nInstalling oh-my-zsh"
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+# Plugins for zsh
+echo -e "\nInstalling plugins for zsh"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins
+
+## Install pywal and backends? Uncomment the next lines
+# sudo pacman -S python-pywal python2 --noconfirm --needed
+# yay -S python-haishoku python-colorthief colorz --noconfirm --needed
 
 figlet "done"

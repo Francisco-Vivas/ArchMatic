@@ -20,6 +20,8 @@ PKGS=(
     # SYSTEM UTILITIES ----------------------------------------------------
 
     'gtkhash'                   # Checksum verifier
+    'picom-ibhagwan-git'        # Translucent Windows
+    'auracle-git'               # AUR client to check
     'wd719x-firmware'           # Additional firmwares 
     'aic94xx-firmware'          # Additional firmwares 
     'upd72020x-fw'              # Additional firmwares 
@@ -42,7 +44,7 @@ PKGS=(
     # UTILITIES -----------------------------------------------------------
 
     'polybar'                   # Status bar
-    'i3lock-fancy'              # Screen locker
+    'betterlockscreen'          # Screen locker
     'notion-app'                # Notes app
     'typora'                    # Markup text editor
     'timeshift'                 # A system restore utility
@@ -74,9 +76,11 @@ PKGS=(
     
 
     # THEMES --------------------------------------------------------------
-    
+
+    'grub-theme-vimix'              # grub theme - https://github.com/Se7endAY/grub2-theme-vimix
     'lightdm-webkit-theme-aether'   # Lightdm Login Theme - https://github.com/NoiSek/Aether#installation
     'aritim-dark-gtk'               # Desktop Theme
+    'papirus-icon-theme'            # Icon theme
     'mcmojave-circle-icon-theme'    # Desktop Icons
     'mcmojave-cursors'              # Cursor Theme
 )

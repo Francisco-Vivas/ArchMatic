@@ -11,40 +11,33 @@ echo -e "\nFINAL SETUP AND CONFIGURATION"
 
 # ------------------------------------------------------------------------
 
-echo -e "\nGenaerating .xinitrc file"
-
-# Generate the .xinitrc file so we can launch i3 gaps from the
-# terminal using the "startx" command
-cat <<EOF > ${HOME}/.xinitrc
-#!/bin/bash
-# Disable bell
-xset -b
-# Disable all Power Saving Stuff
-xset -dpms
-xset s off
-# X Root window color
-xsetroot -solid darkgrey
-# Merge resources (optional)
-#xrdb -merge $HOME/.Xresources
-# Caps to Ctrl, no caps
-setxkbmap -layout us -option ctrl:nocaps
-
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "\$f" ] && . "\$f"
-    done
-    unset f
-fi
-
-EOF
-## Add the next lines to the .xinitrc if it does not initialize i3 correctly
-## and the last line on the bash_profile on the dotfiles to automatically 
-## start with the command startx
-# nitrogen --restore &
-# picom &
-# xrandr -s 1920x1080
-# exec i3
-
+#echo -e "\nGenaerating .xinitrc file"
+#
+## Generate the .xinitrc file so we can launch i3 gaps from the
+## terminal using the "startx" command
+#cat <<EOF > ${HOME}/.xinitrc
+##!/bin/bash
+## Disable bell
+#xset -b
+## Disable all Power Saving Stuff
+#xset -dpms
+#xset s off
+## X Root window color
+#xsetroot -solid darkgrey
+## Merge resources (optional)
+##xrdb -merge $HOME/.Xresources
+## Caps to Ctrl, no caps
+#setxkbmap -layout us -option ctrl:nocaps
+#
+#if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+#    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+#        [ -x "\$f" ] && . "\$f"
+#    done
+#    unset f
+#fi
+#
+#EOF
+#
 # ------------------------------------------------------------------------
 
 echo -e "\nUpdating /bin/startx to use the correct path"
@@ -71,12 +64,64 @@ sudo sed -i -e 's|[#]*COMPRESSXZ=.*|COMPRESSXZ=(xz -c -T 8 -z -)|g' makepkg.conf
 
 # ------------------------------------------------------------------------
 
-# echo -e "\nConfiguring vconsole.conf to set a larger font for login shell"
+# echo -e "\nConfiguring vconsole.conf to set latin american keyboard la-latam1"
 
-# sudo cat <<EOF > /etc/vconsole.conf
-# KEYMAP=us
-# FONT=ter-v32b
-# EOF
+sudo cat <<EOF > /etc/vconsole.conf
+KEYMAP=la-latam1
+EOF
+
+# ------------------------------------------------------------------------
+
+echo -e "\nSetting the Arch-Updates Notifier"
+mkdir $HOME/.config/autostart/ && sudo cp /usr/share/doc/aarchup/aarchup.desktop /home/francisco/.config/autostart/
+sudo cat <<EOF > /usr/share/aarchup/aarchupstartup.sh
+#!/bin/bash
+if [ -z "$(pgrep 'aarchup$')" ];then
+	/usr/bin/aarchup --aur --loop-time 60 --icon /usr/share/aarchup/archlogo.png &
+else
+    kill -9 $(pgrep 'aarchup$')
+    /usr/bin/aarchup --aur --loop-time 60 --icon /usr/share/aarchup/archlogo.png &
+fi
+EOF
+sudo chmod +x /usr/share/aarchup/aarchupstartup.sh
+
+# ------------------------------------------------------------------------
+
+echo -e "\nSetting the touchpad correctly"
+sudo cat <<EOF > /etc/X11/xorg.conf.d/30-touchpad.conffine your own colors for rofi using the values you want base
+Section "InputClass"
+    Identifier "touchpad"
+    Driver "libinput"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "TappingButtonMap" "lrm"
+EndSection
+EOF
+
+# ------------------------------------------------------------------------
+
+echo -e "\n Setting the keyboard on xorg to la-latam1"
+sudo cat <<EOF > /etc/X11/xorg.conf.d/00-keyboard.conf
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout"  "latam"
+        Option "XkbModel"   "pc105"
+        Option "XkbVariant" "deadtilde,dvorak"
+        Option "XkbOptions" "grp:alt_shift_toggle"
+EndSection
+EOF
+
+cat <<EOF > ~/nextSteps.md
+# NumLock on by default using LightDM
+Install the numlockx package and then edit /etc/lightdm/lightdm.conf:
+
+*/etc/lightdm/lightdm.conf*
+```
+[Seat:*]
+greeter-setup-script=/usr/bin/numlockx on
+````
+EOF
 
 # ------------------------------------------------------------------------
 
@@ -107,14 +152,14 @@ sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esoun
 
 echo -e "\nEnabling Login Display Manager"
 
-sudo systemctl enable --now lightdm.service
+sudo systemctl enable lightdm.service
 
 # ------------------------------------------------------------------------
 
 echo -e "\nEnabling bluetooth daemon and setting it to auto-start"
 
 sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g' /etc/bluetooth/main.conf
-sudo systemctl enable --now bluetooth.service
+sudo systemctl enable bluetooth.service
 
 # ------------------------------------------------------------------------
 
@@ -126,9 +171,13 @@ sudo systemctl enable --now ntpd.service
 
 echo -e "\nNetwork setup..."
 
-sudo systemctl disable dhcpcd.service
-sudo systemctl stop dhcpcd.service
 sudo systemctl enable --now NetworkManager.service
+
+
+echo -e "\nSetting the custom user directories"
+xdg-user-dirs-update
+
+
 echo "
 ###############################################################################
 # Cleaning
@@ -143,7 +192,7 @@ sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 if [[ ! -n $(pacman -Qdt) ]]; then
 	echo "No orphans to remove."
 else
-	pacman -Rns $(pacman -Qdtq)
+	sudo pacman -Rns $(pacman -Qdtq)
 fi
 
 # Replace in the same state
@@ -153,3 +202,5 @@ echo "
 # Done
 ###############################################################################
 "
+
+echo "Read the ~/nextSteps.md file for next configurations"

@@ -43,6 +43,8 @@ PKGS=(
     'zip'                   # Zip compression program
     'zsh'                   # ZSH shell
     'zsh-completions'       # Tab completion for ZSH
+    'zsh-syntax-highlighting' # Syntax highlighting
+    'zsh-autosuggestions'   # Auto suggestions
     'gnome-keyring'         # System password storage
     'jq'                    # JSON parsing library
     'figlet'                # Transform text to ASCII
@@ -69,6 +71,9 @@ PKGS=(
     # GENERAL UTILITIES ---------------------------------------------------
 
     'flameshot'             # Screenshots
+    'feh'                   # Image Viewer
+    'playerctl'             # To control the music with the keyboard
+    'xdg-user-dirs'         # Custom user directories
     'nautilus'              # Filesystem browser
     'nitrogen'              # Background browser and setter for X windows
     'veracrypt'             # Disc encryption utility
@@ -85,7 +90,6 @@ PKGS=(
     'gedit'                 # Text editor
     'clang'                 # C Lang compiler
     'cmake'                 # Cross-platform open-source make system
-    'electron'              # Cross-platform development using Javascript
     'git'                   # Version control system
     'gcc'                   # C/C++ compiler
     'glibc'                 # C libraries
@@ -95,7 +99,6 @@ PKGS=(
     'yarn'                  # Dependency management (Hyper needs this)
     'python'                # Scripting language
   # 'android-tools'         # ADB for Android
-
     # COMMUNICATIONS ------------------------------------------------------
 
     'hexchat'                               # Multi format chat

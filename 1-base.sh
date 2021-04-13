@@ -33,7 +33,6 @@ PKGS=(
     'dunst'                 # Notification daemon
     'rofi'                  # Menu System
     'xfce4-power-manager'   # Power Manager 
-    'picom'                 # Translucent Windows
     'xclip'                 # System Clipboard
     'gnome-polkit'          # Elevate Applications
     'lxappearance'          # Set System Themes
