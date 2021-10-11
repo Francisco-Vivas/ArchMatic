@@ -43,20 +43,23 @@ PKGS=(
 
     # UTILITIES -----------------------------------------------------------
 
-    'polybar'                   # Status bar
-    'betterlockscreen'          # Screen locker
-    'notion-app'                # Notes app
-    'typora'                    # Markup text editor
-    'timeshift'                 # A system restore utility
-    'aarchup'                   # Arch update notifier
-    'nerd-fonts-jetbrains-mono' # Nerd fonts
-    'nerd-fonts-meslo'          # Nerd fonts
+    'polybar'                       # Status bar
+    'betterlockscreen'              # Screen locker
+    'notion-app'                    # Notes app
+    'typora'                        # Markup text editor
+    'timeshift'                     # A system restore utility
+    'aarchup'                       # Arch update notifier
+    'nerd-fonts-complete'           # Nerd fonts complete beacuse
+    'epson-inkjet-printer-201207w'  # Epson printer drivers (..., L350, L355, L550,...)
+    # 'nerd-fonts-jetbrains-mono' # Nerd fonts
+    # 'nerd-fonts-meslo'          # Nerd fonts
   # 'synology-drive'            # Synology Drive
   # 'freeoffice'                # Office Alternative
     
     # MEDIA ---------------------------------------------------------------
 
     'spotify'                   # Music player
+    'polybar-spotify-module'    # Polybar spotify module
     'vcl'                       # Video player
     'ferdi-bin'                 # Messenger app
     'screenkey'                 # Screencast your keypresses
@@ -90,7 +93,7 @@ cd ${HOME}/yay
 makepkg -si
 
 for PKG in "${PKGS[@]}"; do
-    yay -S --noconfirm $PKG
+   yay -S --noconfirm $PKG
 done
 
 echo -e "\nDone!\n"
