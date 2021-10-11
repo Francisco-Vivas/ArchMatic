@@ -178,6 +178,10 @@ echo -e "\nSetting the custom user directories"
 xdg-user-dirs-update
 
 
+echo -e "\nSetting Spotify Polybar Module"
+systemctl --user enable spotify-listener
+systemctl --user start spotify-listener
+
 echo "
 ###############################################################################
 # Cleaning
@@ -202,5 +206,4 @@ echo "
 # Done
 ###############################################################################
 "
-
-echo "Read the ~/nextSteps.md file for next configurations"
+echo "You can configure the dotfiles using the dotfiles.sh script"

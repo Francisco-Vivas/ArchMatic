@@ -31,11 +31,13 @@ PKGS=(
     'numlockx'              # Turns on numlock in X11
     'openssh'               # SSH connectivity tools
     'rsync'                 # Remote file sync utility
-    'terminus-font'         # Font package with some bigger fonts for login terminal
+    # 'terminus-font'         # Font package with some bigger fonts for login terminal
     'tlp'                   # Advanced laptop power management
     'p7zip'                 # 7z compression program
     'unrar'                 # RAR compression program
     'unzip'                 # Zip compression program
+    'ueberzug'              # Display images in cli
+    'ripgrep'               # Usability of ag with speed of grep
     'wget'                  # Remote content retrieval
     'alacritty'             # Terminal emulator
     'vim'                   # Terminal Editor
@@ -80,6 +82,8 @@ PKGS=(
     'zathura'               # Minimalistic document viewer
     'zathura-djvu'          # DjVu support for Zathura
     'zathura-pdf-poppler'   # Adds pdf support to zathura by using the poppler engine
+    'yad'                   # Display graph dialog (zenity fork) (Polybar calendar)
+    'xdotool'               # Command-line X11 automation tool (Polybar calendar)
   # 'variety'               # Wallpaper changer
   # 'remmina'               # Remote Connection
   # 'libvncserver'          # VNC Connections
@@ -99,6 +103,7 @@ PKGS=(
     'yarn'                  # Dependency management (Hyper needs this)
     'python'                # Scripting language
   # 'android-tools'         # ADB for Android
+
     # COMMUNICATIONS ------------------------------------------------------
 
     'hexchat'                               # Multi format chat
